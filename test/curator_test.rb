@@ -66,11 +66,13 @@ class CuratorTest < Minitest::Test
 
   def test_it_exists
     curator = Curator.new
+
     assert_instance_of Curator, curator
   end
 
   def test_artists_and_photos_start_empty
     curator = Curator.new
+    
     assert_equal [], curator.artists
     assert_equal [], curator.photographs
   end
@@ -102,6 +104,7 @@ class CuratorTest < Minitest::Test
   def test_can_find_photos_by_artist
     actual = @curator.find_photographs_by_artist(@diane_arbus)
     expected = @curator.photographs[-2..-1]
+
     assert_equal expected, actual
   end
 
@@ -118,6 +121,24 @@ class CuratorTest < Minitest::Test
 
     assert_equal expected, actual
     assert_equal [], bad_actual
+  end
+
+  def test_can_load_photograph_csv_files
+    curator = Curator.new
+    curator.load_photographs('./data/photographs.csv')
+    actual = curator.photographs.last.name
+    expected = "Child with Toy Hand Grenade in Central Park"
+
+    assert_equal expected, actual
+  end
+
+  def test_can_load_artist_csv_files
+    curator = Curator.new
+    curator.load_artists('./data/artists.csv')
+    actual = curator.artists.last.name
+    expected = "Bill Cunningham"
+
+    assert_equal expected, actual
   end
 
 end

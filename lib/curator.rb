@@ -1,4 +1,6 @@
-class Curator
+require './lib/file_io.rb'
+
+class Curator < FileIO
 
   attr_reader :artists,
               :photographs
@@ -31,6 +33,12 @@ class Curator
     end
   end
 
+  def load_photographs(file)
+    load_photographs_csv(file).each do |photo_hash|
+      add_photograph(photo_hash)
+    end
+  end
+
   def add_artist(attributes)
     @artists << Artist.new(attributes)
   end
@@ -48,6 +56,10 @@ class Curator
     end
   end
 
-
+  def load_artists(file)
+    load_artists_csv(file).each do |artist_hash|
+      add_artist(artist_hash)
+    end
+  end
 
 end

@@ -24,6 +24,13 @@ class Curator
     end
   end
 
+  def photographs_taken_by_artists_from(country)
+    @photographs.find_all do |photo|
+       artist = find_artist_by_id(photo.artist_id)
+       artist.country == country
+    end
+  end
+
   def add_artist(attributes)
     @artists << Artist.new(attributes)
   end
@@ -41,6 +48,6 @@ class Curator
     end
   end
 
-  
+
 
 end

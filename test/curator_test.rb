@@ -61,6 +61,7 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(artist_1)
     @curator.add_artist(artist_2)
     @curator.add_artist(artist_3)
+    @diane_arbus = @curator.find_artist_by_id("3")
   end
 
   def test_it_exists
@@ -99,17 +100,24 @@ class CuratorTest < Minitest::Test
   end
 
   def test_can_find_photos_by_artist
-    artist_3 = @curator.artists.last
-    actual = @curator.find_photographs_by_artist(artist_3)
+    actual = @curator.find_photographs_by_artist(@diane_arbus)
     expected = @curator.photographs[-2..-1]
     assert_equal expected, actual
   end
 
   def test_can_find_artists_with_multiple_photos
-    artist_3 = @curator.artists.last
     actual = @curator.artists_with_multiple_photographs
 
-    assert_equal [artist_3], actual
+    assert_equal [@diane_arbus], actual
+  end
+
+  def test_can_find_photos_taken_in_country
+    expected = @curator.photographs[-3..-1]
+    actual = @curator.photographs_taken_by_artists_from("United States")
+    bad_actual = @curator.photographs_taken_by_artists_from("Argentina")
+
+    assert_equal expected, actual
+    assert_equal [], bad_actual
   end
 
 end

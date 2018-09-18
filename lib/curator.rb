@@ -68,4 +68,13 @@ class Curator < FileIO
     end
   end
 
+  def artists_photographs_by_age(artist)
+    artist_photos = find_photographs_by_artist(artist)
+    artist_photos.reduce(Hash.new) do |hash, photo|
+      age = (photo.year.to_i - artist.born.to_i)
+      hash[age] = photo.name
+      hash
+    end
+  end
+
 end

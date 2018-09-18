@@ -150,4 +150,15 @@ class CuratorTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_case_name
+    curator = Curator.new
+    curator.load_photographs('./data/photographs.csv')
+    curator.load_artists('./data/artists.csv')
+    diane_arbus = curator.find_artist_by_id("3")
+    actual = curator.artists_photographs_by_age(diane_arbus)
+    expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
+
+    assert_equal expected, actual
+  end
+
 end

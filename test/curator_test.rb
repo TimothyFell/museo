@@ -72,7 +72,7 @@ class CuratorTest < Minitest::Test
 
   def test_artists_and_photos_start_empty
     curator = Curator.new
-    
+
     assert_equal [], curator.artists
     assert_equal [], curator.photographs
   end
@@ -137,6 +137,15 @@ class CuratorTest < Minitest::Test
     curator.load_artists('./data/artists.csv')
     actual = curator.artists.last.name
     expected = "Bill Cunningham"
+
+    assert_equal expected, actual
+  end
+
+  def test_can_find_photos_within_range
+    curator = Curator.new
+    curator.load_photographs('./data/photographs.csv')
+    actual = curator.photographs_taken_between(1950..1965)
+    expected = [curator.photographs.first, curator.photographs.last]
 
     assert_equal expected, actual
   end

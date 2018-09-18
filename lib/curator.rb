@@ -39,6 +39,12 @@ class Curator < FileIO
     end
   end
 
+  def photographs_taken_between(range)
+    @photographs.find_all do |photo|
+      range.include?(photo.year.to_i)
+    end
+  end
+
   def add_artist(attributes)
     @artists << Artist.new(attributes)
   end

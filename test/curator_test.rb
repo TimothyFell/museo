@@ -105,4 +105,11 @@ class CuratorTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_can_find_artists_with_multiple_photos
+    artist_3 = @curator.artists.last
+    actual = @curator.artists_with_multiple_photographs
+
+    assert_equal [artist_3], actual
+  end
+
 end

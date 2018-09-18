@@ -20,9 +20,9 @@ class PhotographTest < Minitest::Test
   end
 
   def test_has_attributes
-    assert_equal "1", @photo.id
+    assert_equal 1, @photo.id
     assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", @photo.name
-    assert_equal "4", @photo.artist_id
-    assert_equal "1954", @photo.year
+    assert_equal 4, @photo.artist_id
+    assert_equal 1954, @photo.year
   end
 end

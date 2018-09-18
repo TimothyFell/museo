@@ -31,4 +31,10 @@ class FileIO
     end
     return photographs
   end
+
+  def find_object(object_array, id)
+    object_array.find do |object|
+      object.id == id
+    end
+  end
 end

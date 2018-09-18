@@ -21,10 +21,10 @@ class ArtistTest < Minitest::Test
   end
 
   def test_has_attributes
-    assert_equal "2", @artist.id
+    assert_equal 2, @artist.id
     assert_equal "Ansel Adams", @artist.name
-    assert_equal "1902", @artist.born
-    assert_equal "1984", @artist.died
+    assert_equal 1902, @artist.born
+    assert_equal 1984, @artist.died
     assert_equal "United States", @artist.country
   end
 

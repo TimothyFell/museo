@@ -61,7 +61,7 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(artist_1)
     @curator.add_artist(artist_2)
     @curator.add_artist(artist_3)
-    @diane_arbus = @curator.find_artist_by_id("3")
+    @diane_arbus = @curator.find_artist_by_id(3)
   end
 
   def test_it_exists
@@ -79,26 +79,26 @@ class CuratorTest < Minitest::Test
 
   def test_can_add_photos
     assert_equal 4, @curator.photographs.length
-    assert_equal "1", @curator.photographs.first.id
-    assert_equal "4", @curator.photographs.last.id
+    assert_equal 1, @curator.photographs.first.id
+    assert_equal 4, @curator.photographs.last.id
   end
 
   def test_can_add_artists
     assert_equal 3, @curator.artists.length
-    assert_equal "1", @curator.artists.first.id
-    assert_equal "3", @curator.artists.last.id
+    assert_equal 1, @curator.artists.first.id
+    assert_equal 3, @curator.artists.last.id
   end
 
   def test_can_find_photo_by_id
     photo_4 = @curator.photographs.last
 
-    assert_equal photo_4, @curator.find_photograph_by_id("4")
+    assert_equal photo_4, @curator.find_photograph_by_id(4)
   end
 
   def test_can_find_artist_by_id
     artist_3 = @curator.artists.last
 
-    assert_equal artist_3, @curator.find_artist_by_id("3")
+    assert_equal artist_3, @curator.find_artist_by_id(3)
   end
 
   def test_can_find_photos_by_artist
@@ -154,7 +154,7 @@ class CuratorTest < Minitest::Test
     curator = Curator.new
     curator.load_photographs('./data/photographs.csv')
     curator.load_artists('./data/artists.csv')
-    diane_arbus = curator.find_artist_by_id("3")
+    diane_arbus = curator.find_artist_by_id(3)
     actual = curator.artists_photographs_by_age(diane_arbus)
     expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
 

@@ -6,10 +6,10 @@ class Photograph
               :year
 
   def initialize(arg_hash)
-    @id = arg_hash[:id]
+    @id = arg_hash[:id].to_i
     @name = arg_hash[:name]
-    @artist_id = arg_hash[:artist_id]
-    @year = arg_hash[:year]
+    @artist_id = arg_hash[:artist_id].to_i
+    @year = arg_hash[:year].to_i
   end
 
 end

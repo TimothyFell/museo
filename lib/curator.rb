@@ -15,9 +15,7 @@ class Curator < FileIO
   end
 
   def find_photograph_by_id(id)
-    @photographs.find do |photo|
-      photo.id == id
-    end
+    find_object(@photographs, id)
   end
 
   def find_photographs_by_artist(artist)
@@ -41,7 +39,7 @@ class Curator < FileIO
 
   def photographs_taken_between(range)
     @photographs.find_all do |photo|
-      range.include?(photo.year.to_i)
+      range.include?(photo.year)
     end
   end
 
@@ -50,9 +48,7 @@ class Curator < FileIO
   end
 
   def find_artist_by_id(id)
-    @artists.find do |artist|
-      artist.id == id
-    end
+    find_object(@artists, id)
   end
 
   def artists_with_multiple_photographs
@@ -71,10 +67,18 @@ class Curator < FileIO
   def artists_photographs_by_age(artist)
     artist_photos = find_photographs_by_artist(artist)
     artist_photos.reduce(Hash.new) do |hash, photo|
-      age = (photo.year.to_i - artist.born.to_i)
+      age = artists_age(artist, photo)
       hash[age] = photo.name
       hash
     end
+  end
+
+  # I really want to convert both id's and all years
+  # into integers in the two other classes so I don't
+  # have to to_i everywhere I want to do math.
+  # So I did.
+  def artists_age(artist, photo)
+    (photo.year - artist.born)
   end
 
 end
